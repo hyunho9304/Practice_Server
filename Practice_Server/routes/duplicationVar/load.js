@@ -1,11 +1,9 @@
 /*
-	URL : /duplicationVarUpload
-	Description : 하나의 변수에 여러개의 값 업로드 처리
+	URL : /duplicationVar/load
+	Description : 하나의 변수에 여러개의 값 로드 처리
 	Content-type : x-www-form-urlencoded
-	method : POST - Body
-	Body = {
-		noun_list : String
-	}
+	method : GET - query
+	query = /?practice1_index={ table row값 index }
 */
 
 var express = require('express');
@@ -15,9 +13,9 @@ const async = require('async');
 const moment = require( 'moment' ) ;
 
 
-router.post('/', function(req, res) {
+router.get('/', function(req, res) {
 
-	let noun_list = req.body.noun_list ;
+	let practice1_index = req.query.practice1_index ;
 
 	let task = [
 
@@ -38,36 +36,50 @@ router.post('/', function(req, res) {
 
 		function( connection , callback ) {
 
-			let insertPractice1Query = 'INSERT INTO Practice1 VALUES( ? , ? , ? , ? , ? , ? )' ;
+			let selectPractice1Query = 'SELECT * FROM Practice1 WHERE practice1_index = ?' ;
 
-			let queryArr = [] ;
-			queryArr.push( null ) ;
-
-			for( let i = 0 ; i < noun_list.length ; i++ ) {
-				queryArr.push( noun_list[i] ) ;
-			}
-
-			for( let i = noun_list.length ; i < 6 ; i++ ) {
-				queryArr.push( null ) ;
-			}
-
-			connection.query( insertPractice1Query , queryArr , function( err , result ) {
+			connection.query( selectPractice1Query , [ practice1_index ] , function( err , result ) {
 				if(err) {
 					res.status(500).send({
 						status : "fail" ,
 						message : "internal server err"
 					}) ;
 					connection.release() ;
-					callback( "insertPractice1Query err") ;
+					callback( "selectPractice1Query err") ;
 				} else {
-					res.status(201).send({
-						status : "success" , 
-						message : "successful Practice1 upload"
-					}) ;
+					
+					tmp = [] ;
+
+					tmp.push( result[0].first ) ;
+					tmp.push( result[0].second ) ;
+					tmp.push( result[0].third ) ;
+					tmp.push( result[0].fourth ) ;
+					tmp.push( result[0].fifth ) ;
+
+					list = [] ;
+					for( let i = 0 ; i < tmp.length ; i++ ) {
+
+						if( tmp[i] == null ) {
+							break ;
+						}
+
+						list.push( tmp[i] ) ;
+					}
+					
 					connection.release() ;
-					callback( null , "successful Practice1 upload" ) ;
+					callback( null , list ) ;
 				}
 			}) ;
+		} ,
+
+		function( list , callback ) {
+
+			res.status(200).send({
+				status : "success" ,
+				data : list ,
+				message : "successful get list"
+			}) ;
+			callback( null , "successful get list") ;
 		}
 	] ;
 

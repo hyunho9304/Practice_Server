@@ -6,14 +6,13 @@ const moment = require( 'moment' ) ;
 
 router.get( '/' , function( req, res ) {
 
-	let month = [ "01" , "02" , "03" , "04" , "05" , "06" , "07" , "08" , "09" , "10" , "11" , "12" ] ;
 	//	윤년 29 수정해야함
-	let maxDate = [ "31" , "28" , "31" , "30" , "31" , "30" , "31" , "31" , "30" , "31" , "30" , "31" ] ;
+	let maxDate = [ 31 , 28 , 31 , 30 , 31 , 30 , 31 , 31 , 30 , 31 , 30 , 31 ] ;
 	let day = [ "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday" , "Saturday" , "Sunday" ] ;
 
 
-	let currentYear = moment().format( "YYYY" ) ;
-	let currentMonth = moment().format( "MM") ;
+	let currentYear = Number(moment().format( "YYYY" )) ;
+	let currentMonth = Number(moment().format( "MM")) ;
 	let currentDate = Number( moment().format( "DD" )) ;
 	let currentDay = moment().format( "dddd" ) ;
 
@@ -39,16 +38,7 @@ router.get( '/' , function( req, res ) {
 			let twoWeeksYear = [] ;
 			
 			let twoWeeksMonth = [] ;
-			var monthIndex = -1 ;
-			var maxIndex = -1 ;
-			for( var i = 0 ; i < 12 ; i++ ) {
-				if( month[i] == currentMonth ) {
-					monthIndex = i ;
-					maxIndex = maxDate[i] ;
-				}
-			}
-			maxIndex++ ;
-
+			var maxIndex = maxDate[currentMonth - 1] + 1 ;
 
 			let twoWeeksDate = [] ;
 			
@@ -64,18 +54,12 @@ router.get( '/' , function( req, res ) {
 				twoWeeksDay.push( day[ dayIndex % 7]) ;
 
 				var tempDate = currentDate % maxIndex ;
-				if( tempDate == 0 )
+				if( tempDate == 0 ){
 					tempDate = 1 ;
+					maxIndex = maxDate[ ++currentMonth - 1 ] + 1 ;
+				}
 
 				twoWeeksDate.push( tempDate) ;
-
-				// var tempMonth = month[ monthIndex % 12] ;
-				// twoWeeksMonth.push( month[ monthIndex % 12]) ;
-
-
-				// var tempDate = currentDate
-
-				// twoWeeksDate.push( currentDate)
 
 				dayIndex++ ;
 				currentDate++ ;

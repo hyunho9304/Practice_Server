@@ -5,6 +5,9 @@ var router = express.Router();
 const duplicationVar = require( './duplicationVar/index' ) ;
 router.use( '/duplicationVar' , duplicationVar ) ;
 
+const calendar = require( './calendar/index' ) ;
+router.use( '/calendar' , calendar ) ;
+
 module.exports = router;
 
 

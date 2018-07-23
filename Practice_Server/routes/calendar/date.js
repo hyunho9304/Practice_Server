@@ -47,6 +47,7 @@ router.get( '/' , function( req, res ) {
 					maxIndex = maxDate[i] ;
 				}
 			}
+			maxIndex++ ;
 
 
 			let twoWeeksDate = [] ;
@@ -62,10 +63,8 @@ router.get( '/' , function( req, res ) {
 
 				twoWeeksDay.push( day[ dayIndex % 7]) ;
 
-				var tempDate = currentDate ;
-				if( )
-
-				twoWeeksDate.push( currentDate)
+				
+				twoWeeksDate.push( currentDate % maxIndex ) ;
 
 				// var tempMonth = month[ monthIndex % 12] ;
 				// twoWeeksMonth.push( month[ monthIndex % 12]) ;

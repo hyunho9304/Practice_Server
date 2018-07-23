@@ -63,8 +63,11 @@ router.get( '/' , function( req, res ) {
 
 				twoWeeksDay.push( day[ dayIndex % 7]) ;
 
-				
-				twoWeeksDate.push( currentDate % maxIndex ) ;
+				var tempDate = currentDate % maxIndex ;
+				if( tempDate == 0 )
+					tempDate = 1 ;
+
+				twoWeeksDate.push( tempDate) ;
 
 				// var tempMonth = month[ monthIndex % 12] ;
 				// twoWeeksMonth.push( month[ monthIndex % 12]) ;

@@ -67,9 +67,9 @@ router.get( '/' , function( req, res ) {
 				}
 
 				twoWeeksDay.push( dayHangle[ dayIndex % 7]) ;
-				twoWeeksDate.push( tempDate) ;
-				twoWeeksMonth.push( currentMonth ) ;
-				twoWeeksYear.push( currentYear ) ;
+				twoWeeksDate.push( String(tempDate)) ;
+				twoWeeksMonth.push( String(currentMonth )) ;
+				twoWeeksYear.push( String(currentYear )) ;
 
 				dayIndex++ ;
 				currentDateMinus1++ ;

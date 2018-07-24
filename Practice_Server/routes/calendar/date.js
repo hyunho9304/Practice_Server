@@ -6,7 +6,6 @@ const moment = require( 'moment' ) ;
 
 router.get( '/' , function( req, res ) {
 
-	//	윤년 29 수정해야함
 	let maxDate = [ 31 , 28 , 31 , 30 , 31 , 30 , 31 , 31 , 30 , 31 , 30 , 31 ] ;
 	let day = [ "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday" , "Saturday" , "Sunday" ] ;
 
@@ -14,6 +13,10 @@ router.get( '/' , function( req, res ) {
 	let currentMonth = Number(moment().format( "MM")) ;
 	let currentDateMinus1 = Number( moment().format( "DD" )) - 1 ;
 	let currentDay = moment().format( "dddd" ) ;
+
+	//윤년계산
+	if( currentYear % 4 == 0 && currentYear % 100 != 0 || currentYear % 400 == 0 )
+		maxDate[1] = 29 ;
 
 	let task = [
 
@@ -51,13 +54,7 @@ router.get( '/' , function( req, res ) {
 			//	계산
 			for( var i = 0 ; i < 14 ; i++ ) {
 
-				twoWeeksDay.push( day[ dayIndex % 7]) ;
-
-
-				//	28	24
 				var tempDate = ( currentDateMinus1 % maxIndex ) + 1 ;
-			
-
 				if( currentDateMinus1 == maxIndex ){
 					currentMonth++ ;
 					if( currentMonth == 13 ){
@@ -68,6 +65,7 @@ router.get( '/' , function( req, res ) {
 					currentDateMinus1 = 0 ;
 				}
 
+				twoWeeksDay.push( day[ dayIndex % 7]) ;
 				twoWeeksDate.push( tempDate) ;
 				twoWeeksMonth.push( currentMonth ) ;
 				twoWeeksYear.push( currentYear ) ;
@@ -85,10 +83,10 @@ router.get( '/' , function( req, res ) {
 			res.status(200).send({
 				status : "success" ,
 				data : {
-					twoWeeksDay : listDay ,
-					twoWeeksDate : listDate ,
+					twoWeeksYear : listYear ,
 					twoWeeksMonth : listMonth ,
-					twoWeeksYear : listYear
+					twoWeeksDate : listDate ,
+					twoWeeksDay : listDay
 				} ,
 				message : "successful get currentDay"
 			}) ;

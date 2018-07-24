@@ -8,6 +8,7 @@ router.get( '/' , function( req, res ) {
 
 	let maxDate = [ 31 , 28 , 31 , 30 , 31 , 30 , 31 , 31 , 30 , 31 , 30 , 31 ] ;
 	let day = [ "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday" , "Saturday" , "Sunday" ] ;
+	let dayHangle = [ "월" , "화" , "수" , "목" , "금" , "토" , "일" ] ;
 
 	let currentYear = Number(moment().format( "YYYY" )) ;
 	let currentMonth = Number(moment().format( "MM")) ;
@@ -65,7 +66,7 @@ router.get( '/' , function( req, res ) {
 					currentDateMinus1 = 0 ;
 				}
 
-				twoWeeksDay.push( day[ dayIndex % 7]) ;
+				twoWeeksDay.push( dayHangle[ dayIndex % 7]) ;
 				twoWeeksDate.push( tempDate) ;
 				twoWeeksMonth.push( currentMonth ) ;
 				twoWeeksYear.push( currentYear ) ;

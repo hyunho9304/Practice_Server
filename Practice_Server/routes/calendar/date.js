@@ -8,12 +8,18 @@ router.get( '/' , function( req, res ) {
 
 	//	윤년 29 수정해야함
 	let maxDate = [ 31 , 28 , 31 , 30 , 31 , 30 , 31 , 31 , 30 , 31 , 30 , 31 ] ;
+	
+
 	let day = [ "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday" , "Saturday" , "Sunday" ] ;
 
+	// let currentYear = Number(moment().format( "YYYY" )) ;
+	// let currentMonth = Number(moment().format( "MM")) ;
+	// let currentDateMinus1 = Number( moment().format( "DD" )) - 1 ;
+	// let currentDay = moment().format( "dddd" ) ;
 
 	let currentYear = Number(moment().format( "YYYY" )) ;
-	let currentMonth = Number(moment().format( "MM")) ;
-	let currentDate = Number( moment().format( "DD" )) ;
+	let currentMonth = 4 ;
+	let currentDateMinus1 = 28 - 1 ;
 	let currentDay = moment().format( "dddd" ) ;
 
 	let task = [
@@ -38,7 +44,7 @@ router.get( '/' , function( req, res ) {
 			let twoWeeksYear = [] ;
 			
 			let twoWeeksMonth = [] ;
-			var maxIndex = maxDate[currentMonth - 1] + 1 ;
+			var maxIndex = maxDate[currentMonth - 1] ;
 
 			let twoWeeksDate = [] ;
 			
@@ -49,33 +55,47 @@ router.get( '/' , function( req, res ) {
 					dayIndex = i ;
 			}
 
+			//	계산
 			for( var i = 0 ; i < 14 ; i++ ) {
 
 				twoWeeksDay.push( day[ dayIndex % 7]) ;
 
-				var tempDate = currentDate % maxIndex ;
-				if( tempDate == 0 ){
-					tempDate = 1 ;
-					maxIndex = maxDate[ ++currentMonth - 1 ] + 1 ;
+
+				//	28	24
+				var tempDate = ( currentDateMinus1 % maxIndex ) + 1 ;
+			
+
+				if( currentDateMinus1 == maxIndex ){
+					currentMonth++ ;
+					if( currentMonth == 13 ){
+						currentMonth = 1 ;
+						currentYear++ ;
+					}
+					maxIndex = maxDate[ currentMonth - 1 ] ;
+					currentDateMinus1 = 0 ;
 				}
 
 				twoWeeksDate.push( tempDate) ;
+				twoWeeksMonth.push( currentMonth ) ;
+				twoWeeksYear.push( currentYear ) ;
 
 				dayIndex++ ;
-				currentDate++ ;
+				currentDateMinus1++ ;
 			}
 
 			connection.release() ;
-			callback( null , twoWeeksDay , twoWeeksDate ) ;
+			callback( null , twoWeeksDay , twoWeeksDate , twoWeeksMonth , twoWeeksYear ) ;
 		} ,
 
-		function( listDay , listDate , callback ) {
+		function( listDay , listDate , listMonth , listYear , callback ) {
 
 			res.status(200).send({
 				status : "success" ,
 				data : {
 					twoWeeksDay : listDay ,
-					twoWeeksDate : listDate
+					twoWeeksDate : listDate ,
+					twoWeeksMonth : listMonth ,
+					twoWeeksYear : listYear
 				} ,
 				message : "successful get currentDay"
 			}) ;

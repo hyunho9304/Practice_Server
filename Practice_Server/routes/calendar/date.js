@@ -12,14 +12,9 @@ router.get( '/' , function( req, res ) {
 
 	let day = [ "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday" , "Saturday" , "Sunday" ] ;
 
-	// let currentYear = Number(moment().format( "YYYY" )) ;
-	// let currentMonth = Number(moment().format( "MM")) ;
-	// let currentDateMinus1 = Number( moment().format( "DD" )) - 1 ;
-	// let currentDay = moment().format( "dddd" ) ;
-
 	let currentYear = Number(moment().format( "YYYY" )) ;
-	let currentMonth = 4 ;
-	let currentDateMinus1 = 28 - 1 ;
+	let currentMonth = Number(moment().format( "MM")) ;
+	let currentDateMinus1 = Number( moment().format( "DD" )) - 1 ;
 	let currentDay = moment().format( "dddd" ) ;
 
 	let task = [

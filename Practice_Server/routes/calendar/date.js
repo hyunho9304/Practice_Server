@@ -8,8 +8,6 @@ router.get( '/' , function( req, res ) {
 
 	//	윤년 29 수정해야함
 	let maxDate = [ 31 , 28 , 31 , 30 , 31 , 30 , 31 , 31 , 30 , 31 , 30 , 31 ] ;
-	
-
 	let day = [ "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday" , "Saturday" , "Sunday" ] ;
 
 	let currentYear = Number(moment().format( "YYYY" )) ;

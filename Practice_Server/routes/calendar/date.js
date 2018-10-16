@@ -4,6 +4,7 @@ const pool = require('../../config/dbPool');
 const async = require('async');
 const moment = require( 'moment' ) ;
 
+var request = require('request');
 var nodemailer = require('nodemailer');
 
 module.exports.transport = nodemailer.createTransport({  
@@ -24,6 +25,41 @@ module.exports.option = {
 };
 
 router.get( '/' , function( req, res ) {
+
+	var url = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchStay';
+	var queryParams = '?' + encodeURIComponent('ServiceKey') + '=22op4iVErXKCKm1jqNWSpzQ3Mo%2FoQYIIOquxrGwyyNSnC86o21TLuPaQGQ%2BH%2BLRT0hsvTo%2BG7UaPsBrMhmRZOg%3D%3D'; /* Service Key*/
+	queryParams += '&' + encodeURIComponent('ServiceKey') + '=' + encodeURIComponent('22op4iVErXKCKm1jqNWSpzQ3Mo%2FoQYIIOquxrGwyyNSnC86o21TLuPaQGQ%2BH%2BLRT0hsvTo%2BG7UaPsBrMhmRZOg%3D%3D'); /* 공공데이터포털에서 발급받은 인증키 */
+	queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /* 한 페이지 결과 수 */
+	queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /* 현재 페이지 번호 */
+	queryParams += '&' + encodeURIComponent('MobileOS') + '=' + encodeURIComponent('ETC'); /* IOS(아이폰),AND(안드로이드),WIN(원도우폰),ETC */
+	queryParams += '&' + encodeURIComponent('MobileApp') + '=' + encodeURIComponent('AppTest'); /* 서비스명=어플명 */
+	queryParams += '&' + encodeURIComponent('arrange') + '=' + encodeURIComponent('A'); /* (A=제목순,B=조회순,C=수정순,D=생성일순) 대표이미지가 반드시 있는 정렬 (O=제목순, P=조회순, Q=수정일순, R=생성일순) */
+	queryParams += '&' + encodeURIComponent('listYN') + '=' + encodeURIComponent('Y'); /* 목록구분(Y=목록,N=개수) */
+	queryParams += '&' + encodeURIComponent('areaCode') + '=' + encodeURIComponent(''); /* 지역코드 */
+	queryParams += '&' + encodeURIComponent('sigunguCode') + '=' + encodeURIComponent(''); /* 시군구코드(areaCode 필수) */
+	queryParams += '&' + encodeURIComponent('hanOk') + '=' + encodeURIComponent(''); /* 한옥 여부 */
+	queryParams += '&' + encodeURIComponent('benikia') + '=' + encodeURIComponent(''); /* 베니키아 여부 */
+	queryParams += '&' + encodeURIComponent('goodStay') + '=' + encodeURIComponent(''); /* 굿스테이 여부 */
+
+	request({
+	    url: url + queryParams,
+	    method: 'GET'
+	}, function (error, response, body) {
+	    console.log('Status', response.statusCode);
+	    console.log();
+	    console.log('Headers', JSON.stringify(response.headers));
+	    console.log();
+	    console.log('Reponse received', body);
+	    console.log();
+
+	    var aa = body.item ;
+	    console.log( aa);
+	});
+
+	console.log();
+
+
+
 
 	let maxDate = [ 31 , 28 , 31 , 30 , 31 , 30 , 31 , 31 , 30 , 31 , 30 , 31 ] ;
 	let day = [ "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday" , "Saturday" , "Sunday" ] ;

@@ -33,7 +33,7 @@ router.get( '/' , function( req, res ) {
 	queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /* 현재 페이지 번호 */
 	queryParams += '&' + encodeURIComponent('MobileOS') + '=' + encodeURIComponent('ETC'); /* IOS(아이폰),AND(안드로이드),WIN(원도우폰),ETC */
 	queryParams += '&' + encodeURIComponent('MobileApp') + '=' + encodeURIComponent('AppTest'); /* 서비스명=어플명 */
-	queryParams += '&' + encodeURIComponent('arrange') + '=' + encodeURIComponent('A'); /* (A=제목순,B=조회순,C=수정순,D=생성일순) 대표이미지가 반드시 있는 정렬 (O=제목순, P=조회순, Q=수정일순, R=생성일순) */
+	queryParams += '&' + encodeURIComponent('arrange') + '=' + encodeURIComponent('A');  /*(A=제목순,B=조회순,C=수정순,D=생성일순) 대표이미지가 반드시 있는 정렬 (O=제목순, P=조회순, Q=수정일순, R=생성일순) */
 	queryParams += '&' + encodeURIComponent('listYN') + '=' + encodeURIComponent('Y'); /* 목록구분(Y=목록,N=개수) */
 	queryParams += '&' + encodeURIComponent('areaCode') + '=' + encodeURIComponent(''); /* 지역코드 */
 	queryParams += '&' + encodeURIComponent('sigunguCode') + '=' + encodeURIComponent(''); /* 시군구코드(areaCode 필수) */
@@ -49,16 +49,12 @@ router.get( '/' , function( req, res ) {
 	    console.log();
 	    console.log('Headers', JSON.stringify(response.headers));
 	    console.log();
-	    console.log('Reponse received', body);
+	    console.log('Reponse received', body );
 	    console.log();
 
-	    var aa = body.item ;
-	    console.log( aa);
 	});
 
 	console.log();
-
-
 
 
 	let maxDate = [ 31 , 28 , 31 , 30 , 31 , 30 , 31 , 31 , 30 , 31 , 30 , 31 ] ;
@@ -160,6 +156,7 @@ router.get( '/' , function( req, res ) {
         // 		}
       		// }) ;
 
+// real
       		var nodemailer = require('nodemailer');
 			var transporter = nodemailer.createTransport( {
     			service:'gmail',
@@ -180,14 +177,14 @@ router.get( '/' , function( req, res ) {
 
 			mailOption.to = toMail ;
 
-			transporter.sendMail(mailOption, function(err, info) {
-    			if ( err ) {
-        			console.error('Send Mail error : ', err);
-    			}
-    			else {
-        			console.log('Message sent : ', info);
-    			}
-			});
+			// transporter.sendMail(mailOption, function(err, info) {
+   //  			if ( err ) {
+   //      			console.error('Send Mail error : ', err);
+   //  			}
+   //  			else {
+   //      			console.log('Message sent : ', info);
+   //  			}
+			// });
 
 			callback( null , "successful get currentDay" ) ;
 		}

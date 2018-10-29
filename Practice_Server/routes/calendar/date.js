@@ -39,29 +39,6 @@ router.get('/', function(req, res) {
     if (currentYear % 4 == 0 && currentYear % 100 != 0 || currentYear % 400 == 0)
         maxDate[1] = 29;
 
-    var request = require('request');
-
-    var url = 'http://dataopen.kospo.co.kr/openApi/Gene/GenePwrInfoList';
-    var queryParams = '?' + encodeURIComponent('ServiceKey') + '=pWYRlrBQjbNWC01HEbOnEXV9QkQhkw3uM4ZBkXI%2B0CBD5%2BrhBwYjGZGigaPotQQcz07Dfxt5z%2BtSy5%2FrUAUcYw%3D%3D'; /* Service Key*/
-    queryParams += '&' + encodeURIComponent('strEdate') + '=' + encodeURIComponent('20100101'); /* 조회 종료일(최대1년) */
-    queryParams += '&' + encodeURIComponent('strSdate') + '=' + encodeURIComponent('20181025'); /* 조회 시작월 */
-    queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /* 한 페이지출력건수 */
-    queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /* 페이지번호 */
-
-    request({
-        url: url + queryParams,
-        method: 'GET'
-    }, function(error, response, body) {
-        console.log('Status', response.statusCode);
-        console.log('Headers', JSON.stringify(response.headers));
-        console.log('Reponse received', body);
-    });
-
-    console.log();
-    console.log();
-    console.log();
-    console.log();
-
     let task = [
 
         function(callback) {
@@ -100,13 +77,14 @@ router.get('/', function(req, res) {
                 url: url + queryParams,
                 method: 'GET'
             }, function(error, response, body) {
-                // console.log('Status', response.statusCode);
-                // console.log();
-                // console.log('Headers', JSON.stringify(response.headers));
-                // console.log();
-                // console.log('Reponse received', body );
-                fs.writeFile(__dirname + "/test.xml", body, 'utf8', (err) => {
-                    if (err) console.log("error!! : " + err);
+                console.log('Status', response.statusCode);
+                console.log();
+                console.log('Headers', JSON.stringify(response.headers));
+                console.log();
+                console.log('Reponse received', body );
+                fs.writeFile(__dirname + "/test.xml", body, 'utf8', function(err) {
+                    if (err) 
+                    	console.log("error : " + err);
                     console.log();
                     callback(null, connection);
                 });
@@ -117,16 +95,16 @@ router.get('/', function(req, res) {
             var parser = new xml2js.Parser();
 
             fs.readFile(__dirname + "/test.xml", function(err, data) {
-                // console.log(data);
-                // parser.parseString(data, function(err, aa) {
-                //     console.log(aa);
-                //     console.log(aa.response);
-                //     console.log(aa.response.body[0]);
-                //     for(let i = 0 ; i < aa.response.body[0].items.length ; i++){
-                //     	console.log(aa.response.body[0].items[i]);
-                //     }
+                console.log(data);
+                parser.parseString(data, function(err, result) {
+                    console.log(result);
+                    console.log(result.response);
+                    console.log(result.response.body[0]);
+                    for(let i = 0 ; i < result.response.body[0].items.length ; i++){
+                    	console.log(result.response.body[0].items[i]);
+                    }
 
-                // });
+                });
                 callback(null, connection);
             });
         },
@@ -186,19 +164,6 @@ router.get('/', function(req, res) {
                 },
                 message: "successful get currentDay"
             });
-
-            // let option = nodemailer.option ;
-            // let transport = nodemailer.transport ;
-
-            // transport.sendMail( option , function( err , response ) {
-            // 		if( err ) {
-            //   			transport.close() ;
-            //   			callback( null , "fail" ) ;
-            // 		} else {
-            //   			transport.close() ;
-            //   			callback( null , "successMail" ) ;
-            // 		}
-            // }) ;
 
             // real
             var nodemailer = require('nodemailer');

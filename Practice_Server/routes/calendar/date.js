@@ -7,22 +7,22 @@ const fs = require('fs');
 var request = require('request');
 var nodemailer = require('nodemailer');
 
-module.exports.transport = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'hyunho9304@gmail.com',
-        pass: 'tkfkd6749'
-    }
-});
+// module.exports.transport = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//         user: 'hyunho9304@gmail.com',
+//         pass: 'tkfkd6749'
+//     }
+// });
 
-module.exports.option = {
-    from: 'hyunho9304@gmail.com',
-    to: 'hyunho9304@gmail.com',
-    subject: '테스트',
-    html: '<!DOCTYPE html><html><head><meta charset="utf-8"><title></title></head><body><div style="margin : 20px auto; border: 1px solid #cccccc; width:500px;">' +
-        '<div class="title" style="font-size: 30px; text-align: center; margin-top:15px">' +
-        '사업자 등록 인증 메일입니다.</div></div></body></html>'
-};
+// module.exports.option = {
+//     from: 'hyunho9304@gmail.com',
+//     to: 'hyunho9304@gmail.com',
+//     subject: '테스트',
+//     html: '<!DOCTYPE html><html><head><meta charset="utf-8"><title></title></head><body><div style="margin : 20px auto; border: 1px solid #cccccc; width:500px;">' +
+//         '<div class="title" style="font-size: 30px; text-align: center; margin-top:15px">' +
+//         '사업자 등록 인증 메일입니다.</div></div></body></html>'
+// };
 
 router.get('/', function(req, res) {
 

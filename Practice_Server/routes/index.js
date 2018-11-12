@@ -5,8 +5,13 @@ var router = express.Router();
 const duplicationVar = require( './duplicationVar/index' ) ;
 router.use( '/duplicationVar' , duplicationVar ) ;
 
+//	달력 처리
 const calendar = require( './calendar/index' ) ;
 router.use( '/calendar' , calendar ) ;
+
+//	공공데이터 접근 처리
+const publicData = require( './publicData/index' ) ;
+router.use( '/publicData' , publicData ) ;
 
 module.exports = router;
 

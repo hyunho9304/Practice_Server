@@ -90,24 +90,24 @@ router.get('/', function(req, res) {
         //         });
         //     });
         // },
-        // function(connection, callback) {
-        //     var xml2js = require('xml2js');
-        //     var parser = new xml2js.Parser();
+        function(connection, callback) {
+            var xml2js = require('xml2js');
+            var parser = new xml2js.Parser();
 
-        //     fs.readFile(__dirname + "/test.xml", function(err, data) {
-        //         console.log(data);
-        //         parser.parseString(data, function(err, result) {
-        //             console.log(result);
-        //             console.log(result.response);
-        //             console.log(result.response.body[0]);
-        //             for(let i = 0 ; i < result.response.body[0].items.length ; i++){
-        //             	console.log(result.response.body[0].items[i]);
-        //             }
+            fs.readFile(__dirname + "/test.xml", function(err, data) {
+                console.log(data);
+                parser.parseString(data, function(err, result) {
+                    console.log(result);
+                    console.log(result.response);
+                    console.log(result.response.body[0]);
+                    for(let i = 0 ; i < result.response.body[0].items.length ; i++){
+                    	console.log(result.response.body[0].items[i]);
+                    }
 
-        //         });
-        //         callback(null, connection);
-        //     });
-        // },
+                });
+                callback(null, connection);
+            });
+        },
 
         function(connection, callback) {
 

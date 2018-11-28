@@ -56,58 +56,58 @@ router.get('/', function(req, res) {
             });
         },
 
-        function(connection, callback) {
+        // function(connection, callback) {
 
-            var url = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchStay';
-            var queryParams = '?' + encodeURIComponent('ServiceKey') + '=22op4iVErXKCKm1jqNWSpzQ3Mo%2FoQYIIOquxrGwyyNSnC86o21TLuPaQGQ%2BH%2BLRT0hsvTo%2BG7UaPsBrMhmRZOg%3D%3D'; /* Service Key*/
-            queryParams += '&' + encodeURIComponent('ServiceKey') + '=' + encodeURIComponent('22op4iVErXKCKm1jqNWSpzQ3Mo%2FoQYIIOquxrGwyyNSnC86o21TLuPaQGQ%2BH%2BLRT0hsvTo%2BG7UaPsBrMhmRZOg%3D%3D'); /* 공공데이터포털에서 발급받은 인증키 */
-            queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /* 한 페이지 결과 수 */
-            queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /* 현재 페이지 번호 */
-            queryParams += '&' + encodeURIComponent('MobileOS') + '=' + encodeURIComponent('ETC'); /* IOS(아이폰),AND(안드로이드),WIN(원도우폰),ETC */
-            queryParams += '&' + encodeURIComponent('MobileApp') + '=' + encodeURIComponent('AppTest'); /* 서비스명=어플명 */
-            queryParams += '&' + encodeURIComponent('arrange') + '=' + encodeURIComponent('A'); /*(A=제목순,B=조회순,C=수정순,D=생성일순) 대표이미지가 반드시 있는 정렬 (O=제목순, P=조회순, Q=수정일순, R=생성일순) */
-            queryParams += '&' + encodeURIComponent('listYN') + '=' + encodeURIComponent('Y'); /* 목록구분(Y=목록,N=개수) */
-            queryParams += '&' + encodeURIComponent('areaCode') + '=' + encodeURIComponent(''); /* 지역코드 */
-            queryParams += '&' + encodeURIComponent('sigunguCode') + '=' + encodeURIComponent(''); /* 시군구코드(areaCode 필수) */
-            queryParams += '&' + encodeURIComponent('hanOk') + '=' + encodeURIComponent(''); /* 한옥 여부 */
-            queryParams += '&' + encodeURIComponent('benikia') + '=' + encodeURIComponent(''); /* 베니키아 여부 */
-            queryParams += '&' + encodeURIComponent('goodStay') + '=' + encodeURIComponent(''); /* 굿스테이 여부 */
+        //     var url = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchStay';
+        //     var queryParams = '?' + encodeURIComponent('ServiceKey') + '=22op4iVErXKCKm1jqNWSpzQ3Mo%2FoQYIIOquxrGwyyNSnC86o21TLuPaQGQ%2BH%2BLRT0hsvTo%2BG7UaPsBrMhmRZOg%3D%3D'; /* Service Key*/
+        //     queryParams += '&' + encodeURIComponent('ServiceKey') + '=' + encodeURIComponent('22op4iVErXKCKm1jqNWSpzQ3Mo%2FoQYIIOquxrGwyyNSnC86o21TLuPaQGQ%2BH%2BLRT0hsvTo%2BG7UaPsBrMhmRZOg%3D%3D'); /* 공공데이터포털에서 발급받은 인증키 */
+        //     queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /* 한 페이지 결과 수 */
+        //     queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /* 현재 페이지 번호 */
+        //     queryParams += '&' + encodeURIComponent('MobileOS') + '=' + encodeURIComponent('ETC'); /* IOS(아이폰),AND(안드로이드),WIN(원도우폰),ETC */
+        //     queryParams += '&' + encodeURIComponent('MobileApp') + '=' + encodeURIComponent('AppTest'); /* 서비스명=어플명 */
+        //     queryParams += '&' + encodeURIComponent('arrange') + '=' + encodeURIComponent('A'); /*(A=제목순,B=조회순,C=수정순,D=생성일순) 대표이미지가 반드시 있는 정렬 (O=제목순, P=조회순, Q=수정일순, R=생성일순) */
+        //     queryParams += '&' + encodeURIComponent('listYN') + '=' + encodeURIComponent('Y'); /* 목록구분(Y=목록,N=개수) */
+        //     queryParams += '&' + encodeURIComponent('areaCode') + '=' + encodeURIComponent(''); /* 지역코드 */
+        //     queryParams += '&' + encodeURIComponent('sigunguCode') + '=' + encodeURIComponent(''); /* 시군구코드(areaCode 필수) */
+        //     queryParams += '&' + encodeURIComponent('hanOk') + '=' + encodeURIComponent(''); /* 한옥 여부 */
+        //     queryParams += '&' + encodeURIComponent('benikia') + '=' + encodeURIComponent(''); /* 베니키아 여부 */
+        //     queryParams += '&' + encodeURIComponent('goodStay') + '=' + encodeURIComponent(''); /* 굿스테이 여부 */
 
-            request({
-                url: url + queryParams,
-                method: 'GET'
-            }, function(error, response, body) {
-                console.log('Status', response.statusCode);
-                console.log();
-                console.log('Headers', JSON.stringify(response.headers));
-                console.log();
-                console.log('Reponse received', body );
-                fs.writeFile(__dirname + "/test.xml", body, 'utf8', function(err) {
-                    if (err) 
-                    	console.log("error : " + err);
-                    console.log();
-                    callback(null, connection);
-                });
-            });
-        },
-        function(connection, callback) {
-            var xml2js = require('xml2js');
-            var parser = new xml2js.Parser();
+        //     request({
+        //         url: url + queryParams,
+        //         method: 'GET'
+        //     }, function(error, response, body) {
+        //         console.log('Status', response.statusCode);
+        //         console.log();
+        //         console.log('Headers', JSON.stringify(response.headers));
+        //         console.log();
+        //         console.log('Reponse received', body );
+        //         fs.writeFile(__dirname + "/test.xml", body, 'utf8', function(err) {
+        //             if (err) 
+        //             	console.log("error : " + err);
+        //             console.log();
+        //             callback(null, connection);
+        //         });
+        //     });
+        // },
+        // function(connection, callback) {
+        //     var xml2js = require('xml2js');
+        //     var parser = new xml2js.Parser();
 
-            fs.readFile(__dirname + "/test.xml", function(err, data) {
-                console.log(data);
-                parser.parseString(data, function(err, result) {
-                    console.log(result);
-                    console.log(result.response);
-                    console.log(result.response.body[0]);
-                    for(let i = 0 ; i < result.response.body[0].items.length ; i++){
-                    	console.log(result.response.body[0].items[i]);
-                    }
+        //     fs.readFile(__dirname + "/test.xml", function(err, data) {
+        //         console.log(data);
+        //         parser.parseString(data, function(err, result) {
+        //             console.log(result);
+        //             console.log(result.response);
+        //             console.log(result.response.body[0]);
+        //             for(let i = 0 ; i < result.response.body[0].items.length ; i++){
+        //             	console.log(result.response.body[0].items[i]);
+        //             }
 
-                });
-                callback(null, connection);
-            });
-        },
+        //         });
+        //         callback(null, connection);
+        //     });
+        // },
 
         function(connection, callback) {
 

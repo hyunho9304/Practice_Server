@@ -33,9 +33,9 @@ router.get('/', function(req, res) {
             queryParams += '&' + encodeURIComponent('ServiceKey') + '=' + encodeURIComponent('22op4iVErXKCKm1jqNWSpzQ3Mo%2FoQYIIOquxrGwyyNSnC86o21TLuPaQGQ%2BH%2BLRT0hsvTo%2BG7UaPsBrMhmRZOg%3D%3D'); /* 공공데이터포털에서 받은 인증키 */
             queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /* 페이지번호 */
             queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /* 한 페이지 결과 수 */
-            queryParams += '&' + encodeURIComponent('strSdate') + '=' + encodeURIComponent('201605'); /* 조회 시작월 */
-            queryParams += '&' + encodeURIComponent('strEdate') + '=' + encodeURIComponent('201703'); /* 조회 종료월(최대 1년) */
-            queryParams += '&' + encodeURIComponent('strOrgCd') + '=' + encodeURIComponent('5100'); /* 발전소 코드 */
+            queryParams += '&' + encodeURIComponent('strSdate') + '=' + encodeURIComponent('201811'); /* 조회 시작월 */
+            queryParams += '&' + encodeURIComponent('strEdate') + '=' + encodeURIComponent('201811'); /* 조회 종료월(최대 1년) */
+            queryParams += '&' + encodeURIComponent('strOrgCd') + '=' + encodeURIComponent('5900'); /* 발전소 코드 */        //5100 하동
             queryParams += '&' + encodeURIComponent('strHoki') + '=' + encodeURIComponent('1'); /* 호기 코드 */
 
             request({

@@ -1,3 +1,10 @@
+/*
+    URL : /publicData/open
+    Description : 자치구 리스트
+    Content-type : x-www-form-urlencoded
+    method : GET - query
+*/
+
 const express = require('express');
 const router = express.Router();
 const pool = require('../../config/dbPool');
@@ -146,3 +153,4 @@ router.get('/:powercode/:startdate/:enddate/:ho', function(req, res) {
 });
 
 module.exports = router;
+

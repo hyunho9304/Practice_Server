@@ -2,7 +2,7 @@
 
 
 
-## Practice_Server 는
+## Practice_Server
 
 - Node.js 의 실력을 향상시키기 위한 서버 연습공간
 
